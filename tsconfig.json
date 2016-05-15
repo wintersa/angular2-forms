@@ -25,6 +25,7 @@
   "files": [
     "./dev/app.component.ts",
     "./dev/boot.ts",
+    "./dev/data-driven-form.component.ts",
     "./dev/template-driven-form.component.ts"
   ]
 }

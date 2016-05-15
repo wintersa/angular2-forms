@@ -10,36 +10,35 @@ import {ControlGroup, Validators} from 'angular2/common';
           <form [ngFormModel]="myForm" (ngSubmit)="onSubmit()">
               <div>
                   <label for="mail">Mail</label>
-                  <input [ngFormControl]="myForm.controls['email']" type="text" id="mail">
-                  <span class="validation-error">Not valid</span>
+                  <input [ngFormControl]="myForm.controls['email']" type="text" id="mail" #mail="ngForm">
+                  <span class="validation-error" *ngIf="!mail.valid">Not valid</span>
               </div>
               <div>
                   <label for="password">Password</label>
-                  <input [ngFormControl]="myForm.controls['password']" type="text" id="password">
-                  <span class="validation-error">Not valid</span>
+                  <input [ngFormControl]="myForm.controls['password']" type="text" id="password" #password="ngForm">
+                  <span class="validation-error" *ngIf="!password.valid">Not valid</span>
               </div>
               <div>
                   <label for="confirm-password">Confirm Password</label>
-                  <input [ngFormControl]="myForm.controls['confirmPassword']" type="text" id="confirm-password">
-                  <span class="validation-error">Not valid</span>
+                  <input [ngFormControl]="myForm.controls['confirmPassword']" type="text" id="confirm-password" #confirmPassword="ngForm">
+                  <span class="validation-error" *ngIf="!confirmPassword.valid">Not valid</span>
               </div>
               <button type="submit">Submit</button>
           </form>
           <h2>You submitted</h2>
-          <div>Mail: {{user.mail}}</div>
+          <div>Mail: {{user.email}}</div>
           <div>Password: {{user.password}}</div>
-
     `
 })
 
 export class DataDrivenFormComponent implements OnInit{
     myForm: ControlGroup;
-    user = {mail: '', password: ''};
+    user = {email: '', password: ''};
 
     constructor(private _formBuilder: FormBuilder ){}
 
     onSubmit(form){
-        console.log(this.myForm);
+        this.user = this.myForm.value;
     }
 
     ngOnInit():any {
